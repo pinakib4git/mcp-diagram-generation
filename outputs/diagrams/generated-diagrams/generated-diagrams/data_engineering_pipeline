@@ -1,0 +1,32 @@
+digraph "Data Engineering Pipeline" {
+	graph [fontcolor="#2D3436" fontname="Sans-Serif" fontsize=15 label="Data Engineering Pipeline" nodesep=0.60 pad=2.0 rankdir=LR ranksep=0.75 splines=ortho]
+	node [fixedsize=true fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [color="#7B8894"]
+	subgraph "cluster_Data Sources" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="Data Sources" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"880c47ceac6e4349848b7bcc8ee937c3" [label="Source 1" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+		e497c86f1a46498d824dcbebf6f63fea [label="Source 2" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+		"3e7fd3f818014eb0910c74af7ac326e0" [label="Source 3" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+	}
+	subgraph cluster_Ingestion {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label=Ingestion labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		d15f1731f942467696e8e9594d17a1b3 [label="Kinesis Data Stream" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/analytics/kinesis.png" shape=none]
+		"5c63801c2cac446f80c1d916fba2ec1d" [label="Kinesis Firehose" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/analytics/kinesis.png" shape=none]
+	}
+	subgraph cluster_Processing {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label=Processing labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"6f563b21e1a04af3946c80479943466c" [label="Apache Flink" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+		e094b840a3af4b7180f9b721172fe087 [label=EMR height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/analytics/emr.png" shape=none]
+	}
+	subgraph cluster_Storage {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label=Storage labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"404363aaafff44228caf8bf9cc3fe416" [label="S3 Data Lake" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+	}
+	"880c47ceac6e4349848b7bcc8ee937c3" -> d15f1731f942467696e8e9594d17a1b3 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	e497c86f1a46498d824dcbebf6f63fea -> d15f1731f942467696e8e9594d17a1b3 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"3e7fd3f818014eb0910c74af7ac326e0" -> d15f1731f942467696e8e9594d17a1b3 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	d15f1731f942467696e8e9594d17a1b3 -> "6f563b21e1a04af3946c80479943466c" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"6f563b21e1a04af3946c80479943466c" -> "5c63801c2cac446f80c1d916fba2ec1d" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"5c63801c2cac446f80c1d916fba2ec1d" -> e094b840a3af4b7180f9b721172fe087 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	e094b840a3af4b7180f9b721172fe087 -> "404363aaafff44228caf8bf9cc3fe416" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+}

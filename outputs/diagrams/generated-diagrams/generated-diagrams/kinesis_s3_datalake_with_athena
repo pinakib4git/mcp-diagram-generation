@@ -1,0 +1,15 @@
+digraph "Kinesis S3 Datalake with Athena" {
+	graph [fontcolor="#2D3436" fontname="Sans-Serif" fontsize=15 label="Kinesis S3 Datalake with Athena" nodesep=0.60 pad=2.0 rankdir=LR ranksep=0.75 splines=ortho]
+	node [fixedsize=true fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [color="#7B8894"]
+	f1ef6cb382bd47c3bbd83a096c1511c2 [label="Kinesis Data Stream" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/analytics/kinesis.png" shape=none]
+	subgraph "cluster_S3 Data Lake" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="S3 Data Lake" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		ba5734464a49461f8ee548ef72a950cb [label="Raw Data" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+		d4511850d88b44dd807cfa51deee0b7a [label="Processed Data" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+	}
+	f75db88e848d4981a5f82ef3aeb30f58 [label=Athena height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/analytics/athena.png" shape=none]
+	f1ef6cb382bd47c3bbd83a096c1511c2 -> ba5734464a49461f8ee548ef72a950cb [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	ba5734464a49461f8ee548ef72a950cb -> d4511850d88b44dd807cfa51deee0b7a [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	d4511850d88b44dd807cfa51deee0b7a -> f75db88e848d4981a5f82ef3aeb30f58 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+}

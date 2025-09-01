@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  mcp-diagram-server:
+    image: awslabs/aws-diagram-mcp-server:latest
+    container_name: mcp-diagram-server
+    volumes:
+      - ./outputs/diagrams:/workspace
+    stdin_open: true
+    tty: true
+    restart: unless-stopped

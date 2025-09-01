@@ -1,0 +1,14 @@
+{
+  "user_prompt": "Build a Serverless architecture with API Gateway, Lambda, Glue Crawler and Athena to show end to end Data ingestion and analytics. Add SageMaker and LLM Bedrock for GenAI need. Add proper icons based on the icons tools available. ",
+  "diagram_code": "from diagrams import Diagram, Cluster, Edge\nfrom diagrams.aws.compute import Lambda\nfrom diagrams.aws.storage import S3\nfrom diagrams.aws.analytics import Glue, Athena\nfrom diagrams.aws.network import APIGateway\nfrom diagrams.aws.ml import Sagemaker\n\nwith Diagram(\"Serverless Data Analytics and GenAI Architecture\", show=False):\n    api = APIGateway(\"API Gateway\")\n    \n    with Cluster(\"Data Ingestion\"):\n        ingest_lambda = Lambda(\"Ingestion Lambda\")\n        s3_raw = S3(\"Raw Data\")\n        \n    with Cluster(\"Data Processing\"):\n        glue_crawler = Glue(\"Glue Crawler\")\n        athena = Athena(\"Athena\")\n        \n    with Cluster(\"GenAI\"):\n        sagemaker = Sagemaker(\"SageMaker\")\n        bedrock = Lambda(\"LLM Bedrock\")\n        \n    api >> ingest_lambda >> s3_raw\n    s3_raw >> glue_crawler >> athena\n    \n    athena >> sagemaker\n    sagemaker >> bedrock",
+  "mcp_result": {
+    "success": true,
+    "result": "{\n  \"status\": \"success\",\n  \"path\": \"/workspace/generated-diagrams/serverless_analytics_pipeline_777.png\",\n  \"message\": \"Diagram generated successfully at /workspace/generated-diagrams/serverless_analytics_pipeline_777.png\"\n}",
+    "image_path": "c:\\Users\\bpinaki\\Documents\\HCLS\\Cortex-Work\\Architecture-Diagram-MCP\\outputs\\diagrams\\generated-diagrams\\serverless_analytics_pipeline_777.png",
+    "drawio_result": {
+      "success": true,
+      "drawio_path": "c:\\Users\\bpinaki\\Documents\\HCLS\\Cortex-Work\\Architecture-Diagram-MCP\\outputs\\diagrams\\generated-diagrams\\serverless_analytics_pipeline_777.drawio",
+      "message": "Draw.io file created at c:\\Users\\bpinaki\\Documents\\HCLS\\Cortex-Work\\Architecture-Diagram-MCP\\outputs\\diagrams\\generated-diagrams\\serverless_analytics_pipeline_777.drawio"
+    }
+  }
+}
