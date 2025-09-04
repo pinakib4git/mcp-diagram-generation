@@ -1,4 +1,0 @@
-1. Build a simple Kinesis based Data Streaming Architecture. The Data gets processed by ECS.
-
-2. 
-
