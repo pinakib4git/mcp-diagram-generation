@@ -1,6 +1,21 @@
 version: '3.8'
 
 services:
+  # Main application with enhanced DrawIO converter
+  bedrock-strands-agent:
+    build: .
+    container_name: bedrock-strands-agent
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./outputs:/app/outputs
+    environment:
+      - AWS_PROFILE=default
+    depends_on:
+      - mcp-diagram-server
+    restart: unless-stopped
+
+  # MCP Diagram Server
   mcp-diagram-server:
     image: awslabs/aws-diagram-mcp-server:latest
     container_name: mcp-diagram-server

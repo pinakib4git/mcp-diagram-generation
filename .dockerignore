@@ -1,0 +1,38 @@
+# Ignore test files and documentation
+test_*.py
+*_test.py
+*.md
+!README.md
+
+# Ignore output directories content
+outputs/diagrams/*
+outputs/rekognition/*
+!outputs/diagrams/.gitkeep
+!outputs/rekognition/.gitkeep
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore git
+.git/
+.gitignore
+
+# Ignore Docker files
+Dockerfile*
+docker-compose*.yml
+.dockerignore
