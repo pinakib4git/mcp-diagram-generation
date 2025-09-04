@@ -1,0 +1,33 @@
+digraph "Data Ingestion and Processing" {
+	graph [fontcolor="#2D3436" fontname="Sans-Serif" fontsize=15 label="Data Ingestion and Processing" nodesep=0.60 pad=2.0 rankdir=LR ranksep=0.75 splines=ortho]
+	node [fixedsize=true fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [color="#7B8894"]
+	subgraph "cluster_Data Sources" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="Data Sources" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"611f743092d5497b8199f03fb876634c" [label="Data Producer 1" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+		"5753bf6d62da4eeb91dae50c5d9fd167" [label="Data Producer 2" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+	}
+	subgraph cluster_Ingestion {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label=Ingestion labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		cddc2120ebea44a890ee0ccfd0858c63 [label="Kinesis Data Stream" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/analytics/kinesis.png" shape=none]
+	}
+	subgraph cluster_Storage {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label=Storage labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"036a6165613b4d34a760e801baa8049a" [label="Raw Data Bucket" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+		"151e815dff55448ba7a9e32b2fbbb19a" [label="Processed Data Bucket" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+	}
+	subgraph cluster_Processing {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label=Processing labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"5ef2c51f56f04778b0c7acd3b739d353" [label="Glue ETL Job" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/analytics/glue.png" shape=none]
+	}
+	"10e147b7287d4cd8b841165dfa148eb6" [label="IAM Roles" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/identity-and-access-management-iam.png" shape=none]
+	"611f743092d5497b8199f03fb876634c" -> cddc2120ebea44a890ee0ccfd0858c63 [label="Push Data" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"5753bf6d62da4eeb91dae50c5d9fd167" -> cddc2120ebea44a890ee0ccfd0858c63 [label="Push Data" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	cddc2120ebea44a890ee0ccfd0858c63 -> "036a6165613b4d34a760e801baa8049a" [label="Store Raw Data" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"036a6165613b4d34a760e801baa8049a" -> "5ef2c51f56f04778b0c7acd3b739d353" [label="Process Data" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"5ef2c51f56f04778b0c7acd3b739d353" -> "151e815dff55448ba7a9e32b2fbbb19a" [label="Store Processed Data" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"10e147b7287d4cd8b841165dfa148eb6" -> cddc2120ebea44a890ee0ccfd0858c63 [label="Manage Permissions" dir=none fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"10e147b7287d4cd8b841165dfa148eb6" -> "036a6165613b4d34a760e801baa8049a" [label="Manage Permissions" dir=none fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"10e147b7287d4cd8b841165dfa148eb6" -> "151e815dff55448ba7a9e32b2fbbb19a" [label="Manage Permissions" dir=none fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"10e147b7287d4cd8b841165dfa148eb6" -> "5ef2c51f56f04778b0c7acd3b739d353" [label="Manage Permissions" dir=none fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+}
